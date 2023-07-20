@@ -114,12 +114,8 @@
 		398929CE2A690EEA00C9B5FD /* SearchMovieApp */ = {
 			isa = PBXGroup;
 			children = (
-				398929CF2A690EEA00C9B5FD /* AppDelegate.swift */,
-				398929D12A690EEA00C9B5FD /* SceneDelegate.swift */,
-				398929D32A690EEA00C9B5FD /* ViewController.swift */,
-				398929D82A690EEB00C9B5FD /* Assets.xcassets */,
-				398929DA2A690EEB00C9B5FD /* LaunchScreen.storyboard */,
-				398929DD2A690EEB00C9B5FD /* Info.plist */,
+				39892A132A6923BB00C9B5FD /* Application */,
+				39892A142A6923C700C9B5FD /* Resource */,
 			);
 			path = SearchMovieApp;
 			sourceTree = "<group>";
@@ -139,6 +135,26 @@
 				398929F22A690EEC00C9B5FD /* SearchMovieAppUITestsLaunchTests.swift */,
 			);
 			path = SearchMovieAppUITests;
+			sourceTree = "<group>";
+		};
+		39892A132A6923BB00C9B5FD /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				398929CF2A690EEA00C9B5FD /* AppDelegate.swift */,
+				398929D12A690EEA00C9B5FD /* SceneDelegate.swift */,
+				398929D32A690EEA00C9B5FD /* ViewController.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		39892A142A6923C700C9B5FD /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				398929D82A690EEB00C9B5FD /* Assets.xcassets */,
+				398929DA2A690EEB00C9B5FD /* LaunchScreen.storyboard */,
+				398929DD2A690EEB00C9B5FD /* Info.plist */,
+			);
+			path = Resource;
 			sourceTree = "<group>";
 		};
 		AA8790772E4EB495741FA65B /* Pods */ = {
@@ -576,7 +592,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = HF8GHZB58X;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = SearchMovieApp/Info.plist;
+				INFOPLIST_FILE = SearchMovieApp/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -628,7 +644,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = HF8GHZB58X;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = SearchMovieApp/Info.plist;
+				INFOPLIST_FILE = SearchMovieApp/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
