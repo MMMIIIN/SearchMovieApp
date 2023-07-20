@@ -5,4 +5,8 @@
 //  Created by Mingwan Choi on 2023/07/20.
 //
 
-import Foundation
+import UIKit
+
+final class MovieSearchViewController: UIViewController {
+    
+}
