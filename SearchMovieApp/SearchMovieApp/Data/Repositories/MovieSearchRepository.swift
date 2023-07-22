@@ -8,7 +8,8 @@
 import Foundation
 
 final class MovieSearchRepository {
-    func searchMovie(query: String) {
-        
+    func searchMovie(query: String) -> Movie {
+        // FIXME: - empty 수정
+        return Movie.emptyMovie
     }
 }

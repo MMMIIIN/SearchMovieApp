@@ -17,3 +17,16 @@ struct Movie: Identifiable, Equatable {
     let voteAverage: Double
     let voteCount: Int
 }
+
+extension Movie {
+    static let emptyMovie = Movie(
+        id: 1,
+        originalTitle: "originTitle",
+        title: "Title",
+        overview: "overview",
+        imagePath: "imagePath",
+        releaseDate: "date",
+        voteAverage: 1.0,
+        voteCount: 1)
+    
+}

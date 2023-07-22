@@ -19,6 +19,11 @@ final class MovieSearchView: UIView {
         let searchBar = UISearchBar()
         return searchBar
     }()
+    private let movieTitleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "AAAAAA"
+        return label
+    }()
     
     // MARK: - init
     
@@ -44,9 +49,14 @@ final class MovieSearchView: UIView {
         self.movieSearchBar.delegate = viewController
     }
     
+    func updateMovieTitleLabel(to title: String) {
+        self.movieTitleLabel.text = title
+    }
+    
     private func setupLayout() {
         self.flexContainerView.flex.direction(.column).justifyContent(.start).define { flex in
             flex.addItem(self.movieSearchBar)
+            flex.alignItems(.center).addItem(self.movieTitleLabel)
         }
         self.addSubview(self.flexContainerView)
     }
