@@ -7,17 +7,10 @@
 
 import FlexLayout
 import PinLayout
-import RxRelay
 
 import UIKit
 
 final class MovieSearchView: UIView {
-    
-    private enum Section: CaseIterable {
-        case main
-    }
-    
-    private typealias DiffalbleDataSource = UICollectionViewDiffableDataSource<Section, Movie>
     
     // MARK: - ui component
     
@@ -32,17 +25,11 @@ final class MovieSearchView: UIView {
         return collectionView
     }()
     
-    // MARK: - property
-    
-    private var dataSource: DiffalbleDataSource!
-    
     // MARK: - init
     
     override init (frame: CGRect) {
         super.init(frame: .zero)
         self.setupLayout()
-        self.setupDiffableDataSource()
-        self.performQuery()
     }
     
     required init?(coder: NSCoder) {
@@ -62,6 +49,10 @@ final class MovieSearchView: UIView {
         self.movieSearchBar.delegate = viewController
     }
     
+    func collectionView() -> UICollectionView {
+        return self.movieCollectionView
+    }
+    
     private func setupLayout() {
         self.addSubview(flexContainerView)
         
@@ -71,29 +62,10 @@ final class MovieSearchView: UIView {
         }
     }
     
-    private func setupDiffableDataSource() {
-        self.dataSource = UICollectionViewDiffableDataSource<Section, Movie>(collectionView: self.movieCollectionView) {
-            (collectionView, indexPath, item) -> UICollectionViewCell? in
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? MovieCollectionViewCell else {
-                return nil
-            }
-            cell.updateTitle(to: item.title)
-            return cell
-        }
-    }
-    
     private func createCollectionViewLayout() -> UICollectionViewLayout {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         flowLayout.itemSize = CGSize(width: 300, height: 50)
         return flowLayout
-    }
-    
-    func performQuery(with text: String = "movie") {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, Movie>()
-        snapshot.appendSections([.main])
-        let arr = Movie.sampelMovieList.filter { $0.title.contains(text) }
-        snapshot.appendItems(arr, toSection: .main)
-        self.dataSource.apply(snapshot, animatingDifferences: true)
     }
 }
