@@ -34,17 +34,18 @@ final class MovieSearchViewController: UIViewController {
     // MARK: - func
     
     private func bind() {
-        self.viewModel.movieList
-            .subscribe { [weak self] movie in
-                self?.movieSearchView.updateMovieTitleLabel(to: movie.element![0].title)
-            }
-            .disposed(by: self.disposedBag)
+//        self.viewModel.movieList
+//            .subscribe { [weak self] movie in
+//                self?.movieSearchView.updateMovieTitleLabel(to: movie.element![0].title)
+//            }
+//            .disposed(by: self.disposedBag)
     }
 }
 
 extension MovieSearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let searchText = searchBar.text else { return }
+        self.movieSearchView.performQuery(with: searchText)
         self.viewModel.didSearch(query: searchText)
     }
 }

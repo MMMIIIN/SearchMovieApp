@@ -7,10 +7,17 @@
 
 import FlexLayout
 import PinLayout
+import RxRelay
 
 import UIKit
 
 final class MovieSearchView: UIView {
+    
+    private enum Section: CaseIterable {
+        case main
+    }
+    
+    private typealias DiffalbleDataSource = UICollectionViewDiffableDataSource<Section, Movie>
     
     // MARK: - ui component
     
@@ -19,17 +26,23 @@ final class MovieSearchView: UIView {
         let searchBar = UISearchBar()
         return searchBar
     }()
-    private let movieTitleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "AAAAAA"
-        return label
+    private lazy var movieCollectionView: UICollectionView = {
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.createCollectionViewLayout())
+        collectionView.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        return collectionView
     }()
+    
+    // MARK: - property
+    
+    private var dataSource: DiffalbleDataSource!
     
     // MARK: - init
     
     override init (frame: CGRect) {
         super.init(frame: .zero)
         self.setupLayout()
+        self.setupDiffableDataSource()
+        self.performQuery()
     }
     
     required init?(coder: NSCoder) {
@@ -40,7 +53,7 @@ final class MovieSearchView: UIView {
     
     override func layoutSubviews() {
         self.flexContainerView.pin.all(self.pin.safeArea)
-        self.flexContainerView.flex.layout(mode: .fitContainer)
+        self.flexContainerView.flex.layout()
     }
     
     // MARK: - func
@@ -49,15 +62,77 @@ final class MovieSearchView: UIView {
         self.movieSearchBar.delegate = viewController
     }
     
-    func updateMovieTitleLabel(to title: String) {
-        self.movieTitleLabel.text = title
+    private func setupLayout() {
+        self.addSubview(flexContainerView)
+        
+        self.flexContainerView.flex.direction(.column).alignItems(.center).define { flex in
+            flex.addItem(self.movieSearchBar)
+            flex.addItem(self.movieCollectionView).width(100%).height(100%).marginLeft(20).marginRight(20)
+        }
+    }
+    
+    private func setupDiffableDataSource() {
+        self.dataSource = UICollectionViewDiffableDataSource<Section, Movie>(collectionView: self.movieCollectionView) {
+            (collectionView, indexPath, item) -> UICollectionViewCell? in
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? MovieCollectionViewCell else {
+                return nil
+            }
+            cell.updateTitle(to: item.title)
+            return cell
+        }
+    }
+    
+    private func createCollectionViewLayout() -> UICollectionViewLayout {
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        flowLayout.itemSize = CGSize(width: 300, height: 50)
+        return flowLayout
+    }
+    
+    func performQuery(with text: String = "movie") {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Movie>()
+        snapshot.appendSections([.main])
+        let arr = Movie.sampelMovieList.filter { $0.title.contains(text) }
+        snapshot.appendItems(arr, toSection: .main)
+        self.dataSource.apply(snapshot, animatingDifferences: true)
+    }
+}
+
+final class MovieCollectionViewCell: UICollectionViewCell {
+    private let movieTitle: UILabel = {
+        let label = UILabel()
+        label.textColor = .black
+        return label
+    }()
+    
+    func setMovieTitle(to title: String) {
+        self.movieTitle.text = title
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.setupLayout()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func updateTitle(to title: String) {
+        self.movieTitle.text = title
     }
     
     private func setupLayout() {
-        self.flexContainerView.flex.direction(.column).justifyContent(.start).define { flex in
-            flex.addItem(self.movieSearchBar)
-            flex.alignItems(.center).addItem(self.movieTitleLabel)
+        self.layer.borderWidth = 0.5
+        self.layer.borderColor = UIColor.black.cgColor
+        
+        self.addSubview(self.movieTitle)
+        self.flex.alignItems(.center).define { flex in
+            flex.addItem(self.movieTitle)
         }
-        self.addSubview(self.flexContainerView)
+    }
+    
+    override func layoutSubviews() {
+        self.flex.layout()
     }
 }
