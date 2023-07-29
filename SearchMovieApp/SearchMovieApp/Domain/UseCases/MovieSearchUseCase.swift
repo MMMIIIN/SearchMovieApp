@@ -20,6 +20,7 @@ final class DefaultMovieSearchUseCase: MovieSearchUseCase {
     }
     
     func searchMovie(query: String) -> Movie {
+        self.searchMovieRepository.searchMovie(query: query)
         return .emptyMovie
     }
 }

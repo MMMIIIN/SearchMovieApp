@@ -12,7 +12,11 @@ protocol MovieSearchRepository {
 }
 
 final class DefaultMovieSearchRepository: MovieSearchRepository {
+    
+    let movieSearchService: MovieSearchService = MovieSearchService()
+    
     func searchMovie(query: String) -> Movie {
+        self.movieSearchService.fetchNowPlayingMovies()
         // FIXME: - empty 수정
         return Movie.emptyMovie
     }
