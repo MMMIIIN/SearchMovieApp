@@ -41,7 +41,7 @@ extension MovieSearchEndPoint: TargetType {
             "Content-type": "application/json",
             "language": "ko",
             "region": "KR",
-            "authorization": "Bearer ENTER_YOUR_API_KEY"
+            "authorization": "Bearer \(Bundle.main.apiKey)"
         ]
     }
 }
