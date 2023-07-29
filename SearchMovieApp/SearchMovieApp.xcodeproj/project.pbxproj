@@ -105,6 +105,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3915D5362A74ECF9002D6C25 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		398929C32A690EEA00C9B5FD = {
 			isa = PBXGroup;
 			children = (
@@ -233,6 +240,7 @@
 			isa = PBXGroup;
 			children = (
 				3995CC3E2A6A8A55002CB927 /* Repositories */,
+				3915D5362A74ECF9002D6C25 /* Network */,
 			);
 			path = Data;
 			sourceTree = "<group>";

@@ -20,16 +20,16 @@ protocol MovieSearchViewModelOutput {
 typealias MovieSearchViewModelInputOutput = MovieSearchViewModelInput & MovieSearchViewModelOutput
 
 final class MovieSearchViewModel: MovieSearchViewModelInputOutput {
-    let movieSearchRepository: MovieSearchRepository
+    let searchMovieUseCase: SearchMovieUseCase
     
-    init(movieSearchRepository: MovieSearchRepository) {
-        self.movieSearchRepository = movieSearchRepository
+    init(searchMovieUseCase: SearchMovieUseCase) {
+        self.searchMovieUseCase = searchMovieUseCase
     }
     
     var movieList = PublishRelay<[Movie]>()
     
-    func didSearch(query: String) {
-        let movie = self.movieSearchRepository.searchMovie(query: query)
+    func didSearch(query title: String) {
+        let movie = self.searchMovieUseCase.searchMovie(query: title)
         self.movieList.accept([movie])
     }
 }

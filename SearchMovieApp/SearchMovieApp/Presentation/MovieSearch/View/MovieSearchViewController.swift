@@ -24,7 +24,7 @@ final class MovieSearchViewController: UIViewController {
     // MARK: - property
     
     private var dataSource: DiffalbleDataSource!
-    private let viewModel: MovieSearchViewModel = MovieSearchViewModel(movieSearchRepository: MovieSearchRepository())
+    private let viewModel: MovieSearchViewModel = MovieSearchViewModel(searchMovieUseCase: DefaultSearchMovieUseCase(repository: DefaultMovieSearchRepository()))
     private var disposedBag = DisposeBag()
     
     // MARK: - life cycle
