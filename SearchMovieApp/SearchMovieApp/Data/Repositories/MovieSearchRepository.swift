@@ -7,11 +7,11 @@
 
 import Foundation
 
-protocol SearchMovieRepository {
+protocol MovieSearchRepository {
     func searchMovie(query: String) -> Movie
 }
 
-final class DefaultMovieSearchRepository: SearchMovieRepository {
+final class DefaultMovieSearchRepository: MovieSearchRepository {
     func searchMovie(query: String) -> Movie {
         // FIXME: - empty 수정
         return Movie.emptyMovie

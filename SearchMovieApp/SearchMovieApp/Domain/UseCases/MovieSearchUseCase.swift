@@ -1,5 +1,5 @@
 //
-//  SearchMoviesUseCase.swift
+//  MovieSearchUseCase.swift
 //  SearchMovieApp
 //
 //  Created by Mingwan Choi on 2023/07/21.
@@ -7,15 +7,15 @@
 
 import Foundation
 
-protocol SearchMovieUseCase {
+protocol MovieSearchUseCase {
     func searchMovie(query: String) -> Movie
 }
 
-final class DefaultSearchMovieUseCase: SearchMovieUseCase {
+final class DefaultMovieSearchUseCase: MovieSearchUseCase {
     
-    let searchMovieRepository: SearchMovieRepository
+    let searchMovieRepository: MovieSearchRepository
     
-    init(repository: SearchMovieRepository) {
+    init(repository: MovieSearchRepository) {
         self.searchMovieRepository = repository
     }
     
