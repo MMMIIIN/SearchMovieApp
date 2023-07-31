@@ -18,6 +18,7 @@ struct Movie: Identifiable, Equatable, Hashable {
     let voteCount: Int
 }
 
+#if DEBUG
 extension Movie {
     static let emptyMovie = Movie(
         id: Int.random(in: 0...10000),
@@ -56,3 +57,4 @@ extension Movie {
         Movie(id: 13, originalTitle: "movie13", title: "movie13", overview: "test Movie13", imagePath: "", releaseDate: "", voteAverage: 1.0, voteCount: 1)
     ]
 }
+#endif
