@@ -33,14 +33,14 @@ extension MovieSearchEndPoint: TargetType {
     }
     
     var task: Moya.Task {
-        return .requestPlain
+        return .requestParameters(parameters: ["language": "ko",
+                                               "region": "KR"],
+                                  encoding: URLEncoding.queryString)
     }
     
     var headers: [String : String]? {
         return [
             "Content-type": "application/json",
-            "language": "ko",
-            "region": "KR",
             "authorization": "Bearer \(Bundle.main.apiKey)"
         ]
     }

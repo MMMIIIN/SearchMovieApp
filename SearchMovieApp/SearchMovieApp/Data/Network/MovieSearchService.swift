@@ -18,7 +18,7 @@ final class MovieSearchService {
             case let .success(response):
                 do {
                     let movieList = try JSONDecoder().decode(MovieList.self, from: response.data)
-                    print(movieList)
+                    dump(movieList)
                 } catch {
                     print("error catch")
                 }
