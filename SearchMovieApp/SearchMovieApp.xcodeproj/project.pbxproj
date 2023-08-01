@@ -150,6 +150,21 @@
 			path = DataMapping;
 			sourceTree = "<group>";
 		};
+		3915D5512A78D482002D6C25 /* DataTest */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DataTest;
+			sourceTree = "<group>";
+		};
+		3915D5522A78DA40002D6C25 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				39892A1C2A6925AC00C9B5FD /* MovieSearchViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		398929C32A690EEA00C9B5FD = {
 			isa = PBXGroup;
 			children = (
@@ -187,6 +202,7 @@
 		398929E52A690EEC00C9B5FD /* SearchMovieAppTests */ = {
 			isa = PBXGroup;
 			children = (
+				3915D5512A78D482002D6C25 /* DataTest */,
 				39892A1E2A6925C700C9B5FD /* PresentationTest */,
 				398929E62A690EEC00C9B5FD /* SearchMovieAppTests.swift */,
 			);
@@ -234,6 +250,7 @@
 		39892A1A2A69258500C9B5FD /* MovieSearch */ = {
 			isa = PBXGroup;
 			children = (
+				3915D5522A78DA40002D6C25 /* ViewController */,
 				3995CC422A6A9381002CB927 /* ViewModel */,
 				39892A1B2A69259700C9B5FD /* View */,
 			);
@@ -244,7 +261,6 @@
 			isa = PBXGroup;
 			children = (
 				3995CC472A6EBC93002CB927 /* Cell */,
-				39892A1C2A6925AC00C9B5FD /* MovieSearchViewController.swift */,
 				39892A212A6928F100C9B5FD /* MovieSearchView.swift */,
 			);
 			path = View;

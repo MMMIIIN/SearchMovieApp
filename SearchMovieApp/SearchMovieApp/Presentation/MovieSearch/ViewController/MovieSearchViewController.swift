@@ -36,12 +36,29 @@ final class MovieSearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
+        self.loadData()
+        self.bind()
         self.movieSearchView.delegationSearchBar(self)
         self.setupDiffableDataSource()
-        self.performQuery()
     }
     
     // MARK: - func
+    
+    private func loadData() {
+        Task {
+            try await self.viewModel.loadNowPlayingMovies()
+        }
+    }
+    
+    private func bind() {
+        self.viewModel.movieList.subscribe(onNext: { [weak self] movies in
+            var snapshot = NSDiffableDataSourceSnapshot<Section, Movie>()
+            snapshot.appendSections([.main])
+            snapshot.appendItems(movies)
+            self?.dataSource.apply(snapshot, animatingDifferences: true)
+        })
+        .disposed(by: self.disposedBag)
+    }
     
     private func setupDiffableDataSource() {
         self.dataSource = UICollectionViewDiffableDataSource<Section, Movie>(collectionView: self.movieSearchView.collectionView()) {
@@ -54,7 +71,7 @@ final class MovieSearchViewController: UIViewController {
         }
     }
     
-    func performQuery(with text: String = "movie") {
+    func performQuery(with text: String) {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Movie>()
         snapshot.appendSections([.main])
         let arr = Movie.sampelMovieList.filter { $0.title.contains(text) }

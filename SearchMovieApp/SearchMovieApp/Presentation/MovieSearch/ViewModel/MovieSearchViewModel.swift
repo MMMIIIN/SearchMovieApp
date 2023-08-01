@@ -32,4 +32,9 @@ final class MovieSearchViewModel: MovieSearchViewModelInputOutput {
         let movie = self.movieSearchUseCase.searchMovie(query: title)
         self.movieList.accept([movie])
     }
+    
+    func loadNowPlayingMovies() async throws {
+        let movies = try await self.movieSearchUseCase.loadNowPlayingMovies()
+        self.movieList.accept(movies)
+    }
 }
