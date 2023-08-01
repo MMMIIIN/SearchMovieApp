@@ -11,6 +11,7 @@ import Moya
 
 enum MovieSearchEndPoint {
     case nowPlaying
+    case searchMovie(query: String)
 }
 
 extension MovieSearchEndPoint: TargetType {
@@ -22,6 +23,8 @@ extension MovieSearchEndPoint: TargetType {
         switch self {
         case .nowPlaying:
             return "/movie/now_playing"
+        case .searchMovie:
+            return "/search/movie"
         }
     }
     
@@ -29,13 +32,23 @@ extension MovieSearchEndPoint: TargetType {
         switch self {
         case .nowPlaying:
             return .get
+        case .searchMovie:
+            return .get
         }
     }
     
     var task: Moya.Task {
-        return .requestParameters(parameters: ["language": "ko",
-                                               "region": "KR"],
-                                  encoding: URLEncoding.queryString)
+        switch self {
+        case .nowPlaying:
+            return .requestParameters(parameters: ["language": "ko",
+                                                   "region": "KR"],
+                                      encoding: URLEncoding.queryString)
+        case .searchMovie(let query):
+            return .requestParameters(parameters: ["language": "ko",
+                                                   "region": "KR",
+                                                   "query": query],
+                                      encoding: URLEncoding.queryString)
+        }
     }
     
     var headers: [String : String]? {
