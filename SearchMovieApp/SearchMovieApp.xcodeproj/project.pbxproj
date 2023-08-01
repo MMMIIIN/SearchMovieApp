@@ -14,6 +14,10 @@
 		3915D5422A750BD4002D6C25 /* ApiInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3915D5412A750BD4002D6C25 /* ApiInfo.plist */; };
 		3915D5452A750CAC002D6C25 /* APIKey+Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3915D5442A750CAC002D6C25 /* APIKey+Bundle.swift */; };
 		3915D5502A777B81002D6C25 /* MoviePlayingResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3915D54F2A777B81002D6C25 /* MoviePlayingResponseDTO.swift */; };
+		3915D5552A78DB64002D6C25 /* MovieSearchRepositoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3915D5542A78DB64002D6C25 /* MovieSearchRepositoryTest.swift */; };
+		3915D5582A78DBBA002D6C25 /* MovieSearchServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3915D5572A78DBBA002D6C25 /* MovieSearchServiceTest.swift */; };
+		3915D55B2A78DBE9002D6C25 /* MovieSearchViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3915D55A2A78DBE9002D6C25 /* MovieSearchViewModelTest.swift */; };
+		3915D55F2A78DC1D002D6C25 /* MovieSearchUseCaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3915D55E2A78DC1D002D6C25 /* MovieSearchUseCaseTest.swift */; };
 		398929D02A690EEA00C9B5FD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398929CF2A690EEA00C9B5FD /* AppDelegate.swift */; };
 		398929D22A690EEA00C9B5FD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398929D12A690EEA00C9B5FD /* SceneDelegate.swift */; };
 		398929D42A690EEA00C9B5FD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 398929D32A690EEA00C9B5FD /* ViewController.swift */; };
@@ -56,6 +60,10 @@
 		3915D5412A750BD4002D6C25 /* ApiInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ApiInfo.plist; sourceTree = "<group>"; };
 		3915D5442A750CAC002D6C25 /* APIKey+Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "APIKey+Bundle.swift"; sourceTree = "<group>"; };
 		3915D54F2A777B81002D6C25 /* MoviePlayingResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviePlayingResponseDTO.swift; sourceTree = "<group>"; };
+		3915D5542A78DB64002D6C25 /* MovieSearchRepositoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSearchRepositoryTest.swift; sourceTree = "<group>"; };
+		3915D5572A78DBBA002D6C25 /* MovieSearchServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSearchServiceTest.swift; sourceTree = "<group>"; };
+		3915D55A2A78DBE9002D6C25 /* MovieSearchViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSearchViewModelTest.swift; sourceTree = "<group>"; };
+		3915D55E2A78DC1D002D6C25 /* MovieSearchUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSearchUseCaseTest.swift; sourceTree = "<group>"; };
 		398929CC2A690EEA00C9B5FD /* SearchMovieApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SearchMovieApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		398929CF2A690EEA00C9B5FD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		398929D12A690EEA00C9B5FD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -150,11 +158,13 @@
 			path = DataMapping;
 			sourceTree = "<group>";
 		};
-		3915D5512A78D482002D6C25 /* DataTest */ = {
+		3915D5512A78D482002D6C25 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				3915D5562A78DB8B002D6C25 /* Network */,
+				3915D5532A78DB3E002D6C25 /* Repository */,
 			);
-			path = DataTest;
+			path = Data;
 			sourceTree = "<group>";
 		};
 		3915D5522A78DA40002D6C25 /* ViewController */ = {
@@ -163,6 +173,46 @@
 				39892A1C2A6925AC00C9B5FD /* MovieSearchViewController.swift */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		3915D5532A78DB3E002D6C25 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				3915D5542A78DB64002D6C25 /* MovieSearchRepositoryTest.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		3915D5562A78DB8B002D6C25 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				3915D5572A78DBBA002D6C25 /* MovieSearchServiceTest.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		3915D5592A78DBDC002D6C25 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				3915D55A2A78DBE9002D6C25 /* MovieSearchViewModelTest.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		3915D55C2A78DC0B002D6C25 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				3915D55D2A78DC11002D6C25 /* UseCases */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		3915D55D2A78DC11002D6C25 /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+				3915D55E2A78DC1D002D6C25 /* MovieSearchUseCaseTest.swift */,
+			);
+			path = UseCases;
 			sourceTree = "<group>";
 		};
 		398929C32A690EEA00C9B5FD = {
@@ -202,7 +252,8 @@
 		398929E52A690EEC00C9B5FD /* SearchMovieAppTests */ = {
 			isa = PBXGroup;
 			children = (
-				3915D5512A78D482002D6C25 /* DataTest */,
+				3915D55C2A78DC0B002D6C25 /* Domain */,
+				3915D5512A78D482002D6C25 /* Data */,
 				39892A1E2A6925C700C9B5FD /* PresentationTest */,
 				398929E62A690EEC00C9B5FD /* SearchMovieAppTests.swift */,
 			);
@@ -269,6 +320,7 @@
 		39892A1E2A6925C700C9B5FD /* PresentationTest */ = {
 			isa = PBXGroup;
 			children = (
+				3915D5592A78DBDC002D6C25 /* ViewModel */,
 				39892A1F2A6925E500C9B5FD /* MovieSearchViewControllerTest.swift */,
 			);
 			path = PresentationTest;
@@ -615,8 +667,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3915D55F2A78DC1D002D6C25 /* MovieSearchUseCaseTest.swift in Sources */,
 				398929E72A690EEC00C9B5FD /* SearchMovieAppTests.swift in Sources */,
 				39892A202A6925E500C9B5FD /* MovieSearchViewControllerTest.swift in Sources */,
+				3915D5582A78DBBA002D6C25 /* MovieSearchServiceTest.swift in Sources */,
+				3915D55B2A78DBE9002D6C25 /* MovieSearchViewModelTest.swift in Sources */,
+				3915D5552A78DB64002D6C25 /* MovieSearchRepositoryTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
