@@ -17,13 +17,12 @@ final class DefaultMovieSearchRepository: MovieSearchRepository {
     let movieSearchService: MovieSearchService = MovieSearchService()
     
     func searchMovie(query: String) -> Movie {
-        self.movieSearchService.fetchNowPlayingMovies()
         // FIXME: - empty 수정
         return Movie.emptyMovie
     }
     
     func loadNowPlayingMovies() async throws -> [Movie] {
-        let result = try await self.movieSearchService.abc()
+        let result = try await self.movieSearchService.fetchNowPlayingMovies()
         switch result {
         case .success(let movies):
             return movies
