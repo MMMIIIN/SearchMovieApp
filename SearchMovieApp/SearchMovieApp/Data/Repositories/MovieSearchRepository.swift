@@ -8,6 +8,7 @@
 import Foundation
 
 protocol MovieSearchRepository {
+    func loadNowPlayingMovies() async throws -> [Movie]
     func searchMovie(query: String) -> Movie
 }
 
@@ -19,5 +20,16 @@ final class DefaultMovieSearchRepository: MovieSearchRepository {
         self.movieSearchService.fetchNowPlayingMovies()
         // FIXME: - empty 수정
         return Movie.emptyMovie
+    }
+    
+    func loadNowPlayingMovies() async throws -> [Movie] {
+        let result = try await self.movieSearchService.abc()
+        switch result {
+        case .success(let movies):
+            return movies
+        case .failure:
+            print("Error")
+            return []
+        }
     }
 }
