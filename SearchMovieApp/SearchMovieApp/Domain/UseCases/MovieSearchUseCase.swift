@@ -8,7 +8,7 @@
 import Foundation
 
 protocol MovieSearchUseCase {
-    func searchMovie(query: String) -> [Movie]
+    func searchMovie(query: String) async throws -> [Movie]
     func loadNowPlayingMovies() async throws -> [Movie]
 }
 
@@ -20,9 +20,9 @@ final class DefaultMovieSearchUseCase: MovieSearchUseCase {
         self.searchMovieRepository = repository
     }
     
-    func searchMovie(query: String) -> [Movie] {
-        self.searchMovieRepository.searchMovie(query: query)
-        return Movie.sampelMovieList
+    func searchMovie(query: String) async throws -> [Movie] {
+        let movieList = try await self.searchMovieRepository.searchMovie(query: query)
+        return movieList
     }
     
     func loadNowPlayingMovies() async throws -> [Movie] {

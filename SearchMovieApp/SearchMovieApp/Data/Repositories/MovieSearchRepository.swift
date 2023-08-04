@@ -8,7 +8,7 @@
 import Foundation
 
 protocol MovieSearchRepository {
-    func searchMovie(query: String) -> [Movie]
+    func searchMovie(query title: String) async throws -> [Movie]
     func loadNowPlayingMovies() async throws -> [Movie]
 }
 
@@ -20,9 +20,15 @@ final class DefaultMovieSearchRepository: MovieSearchRepository {
         self.movieSearchService = movieSearchService
     }
     
-    func searchMovie(query: String) -> [Movie] {
+    func searchMovie(query title: String) async throws -> [Movie] {
+        let result = try await self.movieSearchService.fetchSearchMovie(query: title)
         // FIXME: - empty 수정
-        return Movie.sampelMovieList
+        switch result {
+        case .success(let movies):
+            return movies
+        case .failure:
+            throw NetworkError.serverError
+        }
     }
     
     func loadNowPlayingMovies() async throws -> [Movie] {
@@ -31,8 +37,7 @@ final class DefaultMovieSearchRepository: MovieSearchRepository {
         case .success(let movies):
             return movies
         case .failure:
-            print("Error")
-            return []
+            throw NetworkError.serverError
         }
     }
 }

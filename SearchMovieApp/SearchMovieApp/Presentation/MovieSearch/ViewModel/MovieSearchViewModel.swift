@@ -11,7 +11,7 @@ import RxRelay
 import Foundation
 
 protocol MovieSearchViewModelInput {
-    func didSearch(query: String)
+    func didSearch(query: String) async throws
 }
 protocol MovieSearchViewModelOutput {
     var movieList: PublishRelay<[Movie]> { get }
@@ -28,9 +28,9 @@ final class MovieSearchViewModel: MovieSearchViewModelInputOutput {
     
     var movieList = PublishRelay<[Movie]>()
     
-    func didSearch(query title: String) {
-        let movie = self.movieSearchUseCase.searchMovie(query: title)
-        self.movieList.accept([movie])
+    func didSearch(query title: String) async throws {
+        let movie = try await self.movieSearchUseCase.searchMovie(query: title)
+        self.movieList.accept(movie)
     }
     
     func loadNowPlayingMovies() async throws {
