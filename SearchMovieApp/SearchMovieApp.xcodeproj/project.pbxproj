@@ -134,11 +134,11 @@
 		3915D5362A74ECF9002D6C25 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				3915D5702A7CD933002D6C25 /* Service */,
+				3915D53E2A74F7D9002D6C25 /* EndPoint */,
 				3915D5622A78F677002D6C25 /* Mock */,
 				3915D54E2A777B6D002D6C25 /* DataMapping */,
 				3915D5432A750C8D002D6C25 /* Helper */,
-				3915D53E2A74F7D9002D6C25 /* EndPoint */,
-				3915D53C2A74F442002D6C25 /* MovieSearchService.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -172,8 +172,8 @@
 		3915D5512A78D482002D6C25 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				3915D5562A78DB8B002D6C25 /* Network */,
 				3915D5532A78DB3E002D6C25 /* Repository */,
+				3915D5562A78DB8B002D6C25 /* Network */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -233,6 +233,14 @@
 				3915D56A2A7CD333002D6C25 /* MockNowPlayingMovieList.json */,
 			);
 			path = Mock;
+			sourceTree = "<group>";
+		};
+		3915D5702A7CD933002D6C25 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				3915D53C2A74F442002D6C25 /* MovieSearchService.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		398929C32A690EEA00C9B5FD = {
