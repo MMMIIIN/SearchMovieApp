@@ -24,7 +24,7 @@ final class MovieSearchViewController: UIViewController {
     // MARK: - property
     
     private var dataSource: DiffalbleDataSource!
-    private let viewModel: MovieSearchViewModel = MovieSearchViewModel(movieSearchUseCase: DefaultMovieSearchUseCase(repository: DefaultMovieSearchRepository()))
+    private let viewModel: MovieSearchViewModel = MovieSearchViewModel(movieSearchUseCase: DefaultMovieSearchUseCase(repository: DefaultMovieSearchRepository(movieSearchService: DefaultMovieSearchService())))
     private var disposedBag = DisposeBag()
     
     // MARK: - life cycle
@@ -70,20 +70,13 @@ final class MovieSearchViewController: UIViewController {
             return cell
         }
     }
-    
-    func performQuery(with text: String) {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, Movie>()
-        snapshot.appendSections([.main])
-        let arr = Movie.sampelMovieList.filter { $0.title.contains(text) }
-        snapshot.appendItems(arr, toSection: .main)
-        self.dataSource.apply(snapshot, animatingDifferences: true)
-    }
 }
 
 extension MovieSearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let searchText = searchBar.text else { return }
-        self.performQuery(with: searchText)
-        self.viewModel.didSearch(query: searchText)
+        Task {
+            try await self.viewModel.didSearch(query: searchText)
+        }
     }
 }
