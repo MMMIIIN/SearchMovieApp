@@ -26,7 +26,7 @@ final class DefaultMovieSearchService: MovieSearchService {
             self.movieSearchProvider.request(.nowPlaying) { result in
                 switch result {
                 case .success(let response):
-                    let movies = try! response.map(MoviePlayingResponseDTO.self)
+                    guard let movies = try? response.map(MoviePlayingResponseDTO.self) else { return continuation.resume(throwing: NetworkError.decodingError)}
                     continuation.resume(returning: .success(movies.toMovieList()))
                 case .failure:
                     continuation.resume(throwing: NetworkError.serverError)
@@ -40,7 +40,7 @@ final class DefaultMovieSearchService: MovieSearchService {
             self.movieSearchProvider.request(.searchMovie(query: title)) { result in
                 switch result {
                 case .success(let response):
-                    let movies = try! response.map(MovieSearchDTO.self)
+                    guard let movies = try? response.map(MovieSearchDTO.self) else { return continuation.resume(throwing: NetworkError.decodingError)}
                     continuation.resume(returning: .success(movies.toMovieList()))
                 case .failure:
                     continuation.resume(throwing: NetworkError.serverError)
