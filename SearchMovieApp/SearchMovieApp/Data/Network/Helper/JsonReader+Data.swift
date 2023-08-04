@@ -15,4 +15,12 @@ extension Data {
         guard let encodeData = jsonString.data(using: String.Encoding.utf8) else { return Data() }
         return encodeData
     }
+    
+    static func loadMockNowPlayingMovieLsit() -> Data {
+        guard let path = Bundle.main.path(forResource: "MockNowPlayingMovieList", ofType: "json") else { return Data() }
+        guard let jsonString = try? String(contentsOfFile: path) else { return Data() }
+        
+        guard let encodeData = jsonString.data(using: String.Encoding.utf8) else { return Data() }
+        return encodeData
+    }
 }
