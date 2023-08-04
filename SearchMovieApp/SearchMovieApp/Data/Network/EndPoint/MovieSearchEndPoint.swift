@@ -57,4 +57,13 @@ extension MovieSearchEndPoint: TargetType {
             "authorization": "Bearer \(Bundle.main.apiKey)"
         ]
     }
+    
+    var sampleData: Data {
+        switch self {
+        case .nowPlaying:
+            return .loadMockNowPlayingMovieLsit()
+        case .searchMovie:
+            return .loadMockMovieList()
+        }
+    }
 }
