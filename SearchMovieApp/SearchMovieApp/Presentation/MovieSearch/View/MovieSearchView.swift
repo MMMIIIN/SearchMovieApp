@@ -15,7 +15,7 @@ final class MovieSearchView: UIView {
     // MARK: - ui component
     
     private let flexContainerView = UIView()
-    let movieSearchBar: UISearchBar = {
+    private let movieSearchBar: UISearchBar = {
         let searchBar = UISearchBar()
         return searchBar
     }()
@@ -51,6 +51,10 @@ final class MovieSearchView: UIView {
     
     func collectionView() -> UICollectionView {
         return self.movieCollectionView
+    }
+    
+    func searchBar() -> UISearchBar {
+        return self.movieSearchBar
     }
     
     private func setupLayout() {

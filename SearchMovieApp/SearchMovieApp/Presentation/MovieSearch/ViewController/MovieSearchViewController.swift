@@ -56,7 +56,7 @@ final class MovieSearchViewController: UIViewController {
     private func transformedOutput() -> MovieSearchViewModelOutput {
         let input = MovieSearchViewModelInput(
             viewDidLoad: Observable.just(()).asObservable(),
-            searchMovie: self.movieSearchView.movieSearchBar.searchTextField.rx.text.orEmpty.asObservable())
+            searchMovie: self.movieSearchView.searchBar().searchTextField.rx.text.orEmpty.asObservable())
         return self.viewModel.transform(input: input)
     }
     
