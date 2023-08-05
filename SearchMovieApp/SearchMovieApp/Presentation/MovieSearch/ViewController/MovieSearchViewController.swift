@@ -6,6 +6,7 @@
 //
 
 import RxSwift
+import RxCocoa
 
 import UIKit
 
@@ -35,23 +36,32 @@ final class MovieSearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
-        self.loadData()
-        self.bind()
+        self.configureUI()
+        self.bindViewModel()
         self.movieSearchView.delegationSearchBar(self)
         self.setupDiffableDataSource()
     }
     
     // MARK: - func
     
-    private func loadData() {
-        Task {
-            try await self.viewModel.loadNowPlayingMovies()
-        }
+    private func configureUI() {
+        self.view.backgroundColor = .white
     }
     
-    private func bind() {
-        self.viewModel.movieList.subscribe(onNext: { [weak self] movies in
+    private func bindViewModel() {
+        let output = self.transformedOutput()
+        self.bindOutputToView(output: output)
+    }
+    
+    private func transformedOutput() -> MovieSearchViewModelOutput {
+        let input = MovieSearchViewModelInput(
+            viewDidLoad: Observable.just(()).asObservable(),
+            searchMovie: self.movieSearchView.movieSearchBar.searchTextField.rx.text.orEmpty.asObservable())
+        return self.viewModel.transform(input: input)
+    }
+    
+    private func bindOutputToView(output: MovieSearchViewModelOutput) {
+        output.movieList.subscribe(onNext: { [weak self] movies in
             var snapshot = NSDiffableDataSourceSnapshot<Section, Movie>()
             snapshot.appendSections([.main])
             snapshot.appendItems(movies)
@@ -67,6 +77,7 @@ final class MovieSearchViewController: UIViewController {
                 return nil
             }
             cell.updateTitle(to: item.title)
+            cell.updateOverView(to: item.overview)
             return cell
         }
     }
@@ -75,8 +86,8 @@ final class MovieSearchViewController: UIViewController {
 extension MovieSearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let searchText = searchBar.text else { return }
-        Task {
-            try await self.viewModel.didSearch(query: searchText)
-        }
+//        Task {
+//            try await self.viewModel.didSearch(query: searchText)
+//        }
     }
 }

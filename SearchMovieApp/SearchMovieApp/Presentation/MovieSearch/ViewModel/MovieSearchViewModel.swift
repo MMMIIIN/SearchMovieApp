@@ -10,31 +10,58 @@ import RxRelay
 
 import Foundation
 
-protocol MovieSearchViewModelInput {
-    func didSearch(query: String) async throws
-}
-protocol MovieSearchViewModelOutput {
-    var movieList: PublishRelay<[Movie]> { get }
+struct MovieSearchViewModelInput {
+    let viewDidLoad: Observable<Void>
+    let searchMovie: Observable<String>
 }
 
-typealias MovieSearchViewModelInputOutput = MovieSearchViewModelInput & MovieSearchViewModelOutput
+struct MovieSearchViewModelOutput {
+    var movieList: PublishRelay<[Movie]>
+}
 
-final class MovieSearchViewModel: MovieSearchViewModelInputOutput {
+final class MovieSearchViewModel {
     let movieSearchUseCase: MovieSearchUseCase
     
     init(movieSearchUseCase: MovieSearchUseCase) {
         self.movieSearchUseCase = movieSearchUseCase
     }
     
+    private var disposedBag: DisposeBag = DisposeBag()
     var movieList = PublishRelay<[Movie]>()
     
-    func didSearch(query title: String) async throws {
-        let movie = try await self.movieSearchUseCase.searchMovie(query: title)
-        self.movieList.accept(movie)
+    func transform(input: MovieSearchViewModelInput) -> MovieSearchViewModelOutput {
+        input.viewDidLoad
+            .withUnretained(self)
+            .subscribe(onNext: { _ in
+                self.loadNowPlayingMovies()
+            })
+            .disposed(by: self.disposedBag)
+        
+        input.searchMovie
+            .filter { !$0.isEmpty }
+            .distinctUntilChanged()
+            .withUnretained(self)
+            .debounce(.seconds(1), scheduler: MainScheduler.instance)
+            .subscribe(onNext: { _, title in
+                print(title)
+                self.searchMovie(query: title)
+            })
+            .disposed(by: self.disposedBag)
+        
+        return MovieSearchViewModelOutput(movieList: self.movieList)
     }
     
-    func loadNowPlayingMovies() async throws {
-        let movies = try await self.movieSearchUseCase.loadNowPlayingMovies()
-        self.movieList.accept(movies)
+    func loadNowPlayingMovies() {
+        Task {
+            let movies = try await self.movieSearchUseCase.loadNowPlayingMovies()
+            self.movieList.accept(movies)
+        }
+    }
+    
+    func searchMovie(query title: String) {
+        Task {
+            let movies = try await self.movieSearchUseCase.searchMovie(query: title)
+            self.movieList.accept(movies)
+        }
     }
 }
