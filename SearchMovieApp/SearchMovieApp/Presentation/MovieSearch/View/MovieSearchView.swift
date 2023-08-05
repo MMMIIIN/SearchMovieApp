@@ -15,12 +15,12 @@ final class MovieSearchView: UIView {
     // MARK: - ui component
     
     private let flexContainerView = UIView()
-    private let movieSearchBar: UISearchBar = {
+    let movieSearchBar: UISearchBar = {
         let searchBar = UISearchBar()
         return searchBar
     }()
     private lazy var movieCollectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.createCollectionViewLayout())
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: self.createLayout())
         collectionView.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
         return collectionView
     }()
@@ -62,10 +62,23 @@ final class MovieSearchView: UIView {
         }
     }
     
-    private func createCollectionViewLayout() -> UICollectionViewLayout {
-        let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        flowLayout.itemSize = CGSize(width: 300, height: 50)
-        return flowLayout
+    private func createLayout() -> UICollectionViewLayout {
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1),
+            heightDimension: .estimated(10)
+        )
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1),
+            heightDimension: .estimated(1)
+        )
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+
+        let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)
+        section.interGroupSpacing = 20
+
+        return UICollectionViewCompositionalLayout(section: section)
     }
 }
