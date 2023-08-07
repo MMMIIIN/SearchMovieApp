@@ -87,8 +87,6 @@ final class MovieCollectionViewCell: UICollectionViewCell {
     }
     
     private func setupLayout() {
-        self.layer.borderWidth = 0.5
-        self.layer.borderColor = UIColor.black.cgColor
         self.addSubview(self.contanerView)
         
         self.contanerView.flex.direction(.row).justifyContent(.spaceBetween).define {
