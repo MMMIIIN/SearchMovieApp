@@ -10,6 +10,9 @@ import FlexLayout
 import UIKit
 
 final class MovieCollectionViewCell: UICollectionViewCell {
+    
+    // MARK: - ui component
+    
     private let movieTitle: UILabel = {
         let label = UILabel()
         label.textColor = .black
@@ -22,9 +25,7 @@ final class MovieCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    func setMovieTitle(to title: String) {
-        self.movieTitle.text = title
-    }
+    // MARK: - init
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -33,6 +34,20 @@ final class MovieCollectionViewCell: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - override
+    
+    override func sizeThatFits(_ size: CGSize) -> CGSize {
+        self.contentView.bounds.size.width = size.width
+        self.contentView.flex.layout(mode: .adjustHeight)
+        return self.contentView.frame.size
+    }
+    
+    // MARK: - func
+    
+    func setMovieTitle(to title: String) {
+        self.movieTitle.text = title
     }
     
     func updateTitle(to title: String) {
@@ -51,11 +66,5 @@ final class MovieCollectionViewCell: UICollectionViewCell {
             flex.addItem(self.movieTitle).marginBottom(10)
             flex.addItem(self.overView)
         }
-    }
-    
-    override func sizeThatFits(_ size: CGSize) -> CGSize {
-        self.contentView.bounds.size.width = size.width
-        self.contentView.flex.layout(mode: .adjustHeight)
-        return self.contentView.frame.size
     }
 }

@@ -20,14 +20,19 @@ struct MovieSearchViewModelOutput {
 }
 
 final class MovieSearchViewModel {
+    
+    // MARK: - property
+    
+    private var disposedBag: DisposeBag = DisposeBag()
+    var movieList = PublishRelay<[Movie]>()
+    
     let movieSearchUseCase: MovieSearchUseCase
     
     init(movieSearchUseCase: MovieSearchUseCase) {
         self.movieSearchUseCase = movieSearchUseCase
     }
     
-    private var disposedBag: DisposeBag = DisposeBag()
-    var movieList = PublishRelay<[Movie]>()
+    // MARK: - func
     
     func transform(input: MovieSearchViewModelInput) -> MovieSearchViewModelOutput {
         input.viewDidLoad
