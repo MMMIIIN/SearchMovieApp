@@ -38,7 +38,6 @@ final class MovieSearchViewController: UIViewController {
         super.viewDidLoad()
         self.configureUI()
         self.bindViewModel()
-        self.movieSearchView.delegationSearchBar(self)
         self.setupDiffableDataSource()
     }
     
@@ -80,14 +79,5 @@ final class MovieSearchViewController: UIViewController {
             cell.updateOverView(to: item.overview)
             return cell
         }
-    }
-}
-
-extension MovieSearchViewController: UISearchBarDelegate {
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        guard let searchText = searchBar.text else { return }
-//        Task {
-//            try await self.viewModel.didSearch(query: searchText)
-//        }
     }
 }

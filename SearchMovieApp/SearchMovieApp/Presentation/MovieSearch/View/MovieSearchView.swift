@@ -45,10 +45,6 @@ final class MovieSearchView: UIView {
     
     // MARK: - func
     
-    func delegationSearchBar(_ viewController: MovieSearchViewController) {
-        self.movieSearchBar.delegate = viewController
-    }
-    
     func collectionView() -> UICollectionView {
         return self.movieCollectionView
     }
