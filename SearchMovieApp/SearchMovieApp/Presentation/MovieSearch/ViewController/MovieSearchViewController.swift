@@ -36,16 +36,11 @@ final class MovieSearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.configureUI()
         self.bindViewModel()
         self.setupDiffableDataSource()
     }
     
     // MARK: - func
-    
-    private func configureUI() {
-        self.view.backgroundColor = .white
-    }
     
     private func bindViewModel() {
         let output = self.transformedOutput()
@@ -77,6 +72,8 @@ final class MovieSearchViewController: UIViewController {
             }
             cell.updateTitle(to: item.title)
             cell.updateOverView(to: item.overview)
+            cell.updateImageView(to: item.imagePath)
+            cell.updateVoteArange(to: item.voteAverage)
             return cell
         }
     }

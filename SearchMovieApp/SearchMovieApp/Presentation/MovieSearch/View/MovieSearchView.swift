@@ -30,6 +30,7 @@ final class MovieSearchView: UIView {
     override init (frame: CGRect) {
         super.init(frame: .zero)
         self.setupLayout()
+        self.configureUI()
     }
     
     required init?(coder: NSCoder) {
@@ -44,6 +45,10 @@ final class MovieSearchView: UIView {
     }
     
     // MARK: - func
+    
+    private func configureUI() {
+        self.backgroundColor = .white
+    }
     
     func collectionView() -> UICollectionView {
         return self.movieCollectionView
