@@ -5,7 +5,7 @@
 //  Created by Mingwan Choi on 2023/08/07.
 //
 
-import UIKitSearchMovieApp/Presentation/Utils/Extensions/UIFont+Extension.swift
+import UIKit
 
 extension UIImageView {
     func load(url: String) {
