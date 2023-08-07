@@ -18,12 +18,20 @@ final class MovieCollectionViewCell: UICollectionViewCell {
     private let movieTitle: UILabel = {
         let label = UILabel()
         label.textColor = .black
+        label.font = .font(size: 18)
+        return label
+    }()
+    private let voteArange: UILabel = {
+        let label = UILabel()
+        label.textColor = .systemGray2
+        label.font = .font(size: 14)
         return label
     }()
     private let overView: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
         label.textColor = .systemGray
+        label.font = .font(size: 16)
         return label
     }()
     private let posterImageView = UIImageView()
@@ -52,6 +60,10 @@ final class MovieCollectionViewCell: UICollectionViewCell {
         return self.contanerView.frame.size
     }
     
+    override func prepareForReuse() {
+        self.posterImageView.image = nil
+    }
+    
     // MARK: - func
     
     func setMovieTitle(to title: String) {
@@ -60,6 +72,10 @@ final class MovieCollectionViewCell: UICollectionViewCell {
     
     func updateTitle(to title: String) {
         self.movieTitle.text = title
+    }
+    
+    func updateVoteArange(to arange: Double) {
+        self.voteArange.text = "평점 \(arange.description)"
     }
     
     func updateOverView(to text: String) {
@@ -77,8 +93,9 @@ final class MovieCollectionViewCell: UICollectionViewCell {
         
         self.contanerView.flex.direction(.row).justifyContent(.spaceBetween).define {
             $0.addItem().direction(.column).width(75%).define { flex in
-                flex.addItem(self.movieTitle).marginBottom(10)
-                flex.addItem(self.overView)
+                flex.addItem(self.movieTitle).marginBottom(4)
+                flex.addItem(self.overView).marginBottom(12)
+                flex.addItem(self.voteArange)
             }
             $0.addItem().direction(.column).width(20%).define { flex in
                 flex.addItem(self.posterImageView).minWidth(70).aspectRatio(9/16)
@@ -99,5 +116,11 @@ extension UIImageView {
                 }
             }
         }
+    }
+}
+
+extension UIFont {
+    static func font(size: CGFloat) -> UIFont {
+        return UIFont(name: "Apple SD Gothic Neo", size: size)!
     }
 }
