@@ -14,7 +14,12 @@ final class MovieCollectionViewCell: UICollectionViewCell {
     
     // MARK: - ui component
     
-    private let contanerView = UIView()
+    private let contanerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .systemGray6
+        view.layer.cornerRadius = 10
+        return view
+    }()
     private let movieTitle: UILabel = {
         let label = UILabel()
         label.textColor = .black
@@ -89,13 +94,13 @@ final class MovieCollectionViewCell: UICollectionViewCell {
     private func setupLayout() {
         self.addSubview(self.contanerView)
         
-        self.contanerView.flex.direction(.row).justifyContent(.spaceBetween).define {
-            $0.addItem().direction(.column).width(75%).define { flex in
+        self.contanerView.flex.direction(.row).padding(12).justifyContent(.spaceBetween).define {
+            $0.addItem().direction(.column).maxWidth(80%).define { flex in
                 flex.addItem(self.movieTitle).marginBottom(4)
                 flex.addItem(self.overView).marginBottom(12)
                 flex.addItem(self.voteArange)
             }
-            $0.addItem().direction(.column).width(20%).define { flex in
+            $0.addItem().direction(.column).minWidth(20%).define { flex in
                 flex.addItem(self.posterImageView).minWidth(70).aspectRatio(9/16)
             }
         }
