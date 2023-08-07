@@ -103,24 +103,3 @@ final class MovieCollectionViewCell: UICollectionViewCell {
         }
     }
 }
-
-extension UIImageView {
-    func load(url: String) {
-        DispatchQueue.global().async { [weak self] in
-            guard let fullUrl = URL(string: "https://image.tmdb.org/t/p/w154\(url)")  else { return }
-            if let data = try? Data(contentsOf: fullUrl) {
-                if let image = UIImage(data: data) {
-                    DispatchQueue.main.async {
-                        self?.image = image
-                    }
-                }
-            }
-        }
-    }
-}
-
-extension UIFont {
-    static func font(size: CGFloat) -> UIFont {
-        return UIFont(name: "Apple SD Gothic Neo", size: size)!
-    }
-}
