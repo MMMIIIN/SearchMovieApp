@@ -6,6 +6,7 @@
 //
 
 import FlexLayout
+import PinLayout
 
 import UIKit
 
@@ -13,6 +14,7 @@ final class MovieCollectionViewCell: UICollectionViewCell {
     
     // MARK: - ui component
     
+    private let contanerView = UIView()
     private let movieTitle: UILabel = {
         let label = UILabel()
         label.textColor = .black
@@ -24,6 +26,7 @@ final class MovieCollectionViewCell: UICollectionViewCell {
         label.textColor = .systemGray
         return label
     }()
+    private let posterImageView = UIImageView()
     
     // MARK: - init
     
@@ -38,10 +41,15 @@ final class MovieCollectionViewCell: UICollectionViewCell {
     
     // MARK: - override
     
+    override func layoutSubviews() {
+        self.contanerView.pin.all()
+        self.contanerView.flex.layout()
+    }
+    
     override func sizeThatFits(_ size: CGSize) -> CGSize {
-        self.contentView.bounds.size.width = size.width
-        self.contentView.flex.layout(mode: .adjustHeight)
-        return self.contentView.frame.size
+        self.contanerView.bounds.size.width = size.width
+        self.contanerView.flex.layout(mode: .adjustHeight)
+        return self.contanerView.frame.size
     }
     
     // MARK: - func
@@ -58,13 +66,38 @@ final class MovieCollectionViewCell: UICollectionViewCell {
         self.overView.text = text
     }
     
+    func updateImageView(to url: String) {
+        self.posterImageView.load(url: url)
+    }
+    
     private func setupLayout() {
         self.layer.borderWidth = 0.5
         self.layer.borderColor = UIColor.black.cgColor
+        self.addSubview(self.contanerView)
         
-        self.contentView.flex.define { flex in
-            flex.addItem(self.movieTitle).marginBottom(10)
-            flex.addItem(self.overView)
+        self.contanerView.flex.direction(.row).justifyContent(.spaceBetween).define {
+            $0.addItem().direction(.column).width(75%).define { flex in
+                flex.addItem(self.movieTitle).marginBottom(10)
+                flex.addItem(self.overView)
+            }
+            $0.addItem().direction(.column).width(20%).define { flex in
+                flex.addItem(self.posterImageView).minWidth(70).aspectRatio(9/16)
+            }
+        }
+    }
+}
+
+extension UIImageView {
+    func load(url: String) {
+        DispatchQueue.global().async { [weak self] in
+            guard let fullUrl = URL(string: "https://image.tmdb.org/t/p/w154\(url)")  else { return }
+            if let data = try? Data(contentsOf: fullUrl) {
+                if let image = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        self?.image = image
+                    }
+                }
+            }
         }
     }
 }
