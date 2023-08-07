@@ -71,9 +71,10 @@ final class MovieSearchViewController: UIViewController {
                 return nil
             }
             cell.updateTitle(to: item.title)
+            cell.updateReleaseDate(to: item.releaseDate)
             cell.updateOverView(to: item.overview)
-            cell.updateImageView(to: item.imagePath)
             cell.updateVoteArange(to: item.voteAverage)
+            cell.updateImageView(to: item.imagePath)
             return cell
         }
     }

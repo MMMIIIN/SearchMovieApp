@@ -26,10 +26,10 @@ final class MovieCollectionViewCell: UICollectionViewCell {
         label.font = .font(size: 18)
         return label
     }()
-    private let voteArange: UILabel = {
+    private let releaseData: UILabel = {
         let label = UILabel()
-        label.textColor = .systemGray2
         label.font = .font(size: 14)
+        label.textColor = .systemGray2
         return label
     }()
     private let overView: UILabel = {
@@ -37,6 +37,12 @@ final class MovieCollectionViewCell: UICollectionViewCell {
         label.numberOfLines = 0
         label.textColor = .systemGray
         label.font = .font(size: 16)
+        return label
+    }()
+    private let voteArange: UILabel = {
+        let label = UILabel()
+        label.textColor = .systemGray2
+        label.font = .font(size: 14)
         return label
     }()
     private let posterImageView = UIImageView()
@@ -71,20 +77,20 @@ final class MovieCollectionViewCell: UICollectionViewCell {
     
     // MARK: - func
     
-    func setMovieTitle(to title: String) {
-        self.movieTitle.text = title
-    }
-    
     func updateTitle(to title: String) {
         self.movieTitle.text = title
     }
     
-    func updateVoteArange(to arange: Double) {
-        self.voteArange.text = "평점 \(arange.description)"
+    func updateReleaseDate(to date: String) {
+        self.releaseData.text = "개봉일 : \(date)"
     }
     
     func updateOverView(to text: String) {
         self.overView.text = text
+    }
+    
+    func updateVoteArange(to arange: Double) {
+        self.voteArange.text = "평점 \(arange.description)"
     }
     
     func updateImageView(to url: String) {
@@ -97,6 +103,7 @@ final class MovieCollectionViewCell: UICollectionViewCell {
         self.contanerView.flex.direction(.row).padding(12).justifyContent(.spaceBetween).define {
             $0.addItem().direction(.column).maxWidth(80%).define { flex in
                 flex.addItem(self.movieTitle).marginBottom(4)
+                flex.addItem(self.releaseData).marginBottom(4)
                 flex.addItem(self.overView).marginBottom(12)
                 flex.addItem(self.voteArange)
             }
