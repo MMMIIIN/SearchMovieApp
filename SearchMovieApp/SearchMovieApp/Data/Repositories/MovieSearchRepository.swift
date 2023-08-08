@@ -22,7 +22,6 @@ final class DefaultMovieSearchRepository: MovieSearchRepository {
     
     func searchMovie(query title: String) async throws -> [Movie] {
         let result = try await self.movieSearchService.fetchSearchMovie(query: title)
-        // FIXME: - empty 수정
         switch result {
         case .success(let movies):
             return movies

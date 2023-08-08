@@ -49,10 +49,3 @@ final class DefaultMovieSearchService: MovieSearchService {
         }
     }
 }
-
-// FIXME: - 위치 수정
-enum NetworkError: Error {
-    case decodingError
-    case serverError
-    case unknownError
-}
