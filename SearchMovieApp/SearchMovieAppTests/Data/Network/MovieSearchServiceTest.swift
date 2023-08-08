@@ -41,11 +41,11 @@ final class MovieSearchServiceTest: XCTestCase {
         case .failure(let error):
             switch error {
             case .unknownError:
-                XCTAssertTrue(false, "unknown Error")
+                XCTFail("unknown Error")
             case .decodingError:
-                XCTAssertTrue(false, "decoding Error")
+                XCTFail("decoding Error")
             default:
-                XCTAssertTrue(false, "Error")
+                XCTFail("Error")
             }
         }
     }
@@ -63,12 +63,34 @@ final class MovieSearchServiceTest: XCTestCase {
         case .failure(let error):
             switch error {
             case .unknownError:
-                XCTAssertTrue(false, "unknown Error")
+                XCTFail("unknown Error")
             case .decodingError:
-                XCTAssertTrue(false, "decoding Error")
+                XCTFail("decoding Error")
             default:
-                XCTAssertTrue(false, "Error")
+                XCTFail("Error")
             }
+        }
+    }
+    
+    func test_nowPlaying함수의_400에러가_제대로_처리되는가() async throws {
+        let service = MockMovieSearchService()
+        
+        do {
+            let result = try await service.fetchNowPlayingMovies400Error()
+            XCTFail()
+        } catch {
+            XCTAssert(error is NetworkError, "Expected a NetworkError to be thrown")
+        }
+    }
+    
+    func test_searchMovie함수의_400에러가_제대로_처리되는가() async throws {
+        let service = MockMovieSearchService()
+        
+        do {
+            let _ = try await service.fetchSearchMovie400Error(query: "범죄도시")
+            XCTFail()
+        } catch {
+            XCTAssert(error is NetworkError, "Expected a NetworkError to be thrown")
         }
     }
 }
