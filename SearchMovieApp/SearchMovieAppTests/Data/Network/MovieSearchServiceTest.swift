@@ -30,45 +30,48 @@ final class MovieSearchServiceTest: XCTestCase {
     }
     
     func test_searchMovie함수가_올바르게_디코딩되는가() async throws {
-        // given
         let mockService = MockMovieSearchService()
-        // when
-        let result = try await mockService.fetchSearchMovie(query: "범죄도시")
-        // then
-        switch result {
-        case .success(let movieList):
-            XCTAssertNotNil(movieList)
-        case .failure(let error):
-            switch error {
-            case .unknownError:
-                XCTFail("unknown Error")
-            case .decodingError:
-                XCTFail("decoding Error")
-            default:
-                XCTFail("Error")
+        
+        do {
+            let result = try await mockService.fetchSearchMovie(query: "범죄도시")
+            switch result {
+            case .success(let movieList):
+                XCTAssertNotNil(movieList)
+            case .failure(let error):
+                switch error {
+                case .unknownError:
+                    XCTFail("unknown Error")
+                case .decodingError:
+                    XCTFail("decoding Error")
+                default:
+                    XCTFail("Error")
+                }
             }
+        } catch {
+            XCTFail("Error")
         }
     }
     
     func test_nowPlaying함수가_올바르게_디코딩되는가() async throws {
-        // given
         let mockService = MockMovieSearchService()
-        // when
-        let result = try await mockService.fetchNowPlayingMovies()
         
-        // then
-        switch result {
-        case .success(let movieList):
-            XCTAssertNotNil(movieList)
-        case .failure(let error):
-            switch error {
-            case .unknownError:
-                XCTFail("unknown Error")
-            case .decodingError:
-                XCTFail("decoding Error")
-            default:
-                XCTFail("Error")
+        do {
+            let result = try await mockService.fetchNowPlayingMovies()
+            switch result {
+            case .success(let movieList):
+                XCTAssertNotNil(movieList)
+            case .failure(let error):
+                switch error {
+                case .unknownError:
+                    XCTFail("unknown Error")
+                case .decodingError:
+                    XCTFail("decoding Error")
+                default:
+                    XCTFail("Error")
+                }
             }
+        } catch {
+            XCTFail("Error")
         }
     }
     
@@ -76,8 +79,8 @@ final class MovieSearchServiceTest: XCTestCase {
         let service = MockMovieSearchService()
         
         do {
-            let result = try await service.fetchNowPlayingMovies400Error()
-            XCTFail()
+            let _ = try await service.fetchNowPlayingMovies400Error()
+            XCTFail("Error")
         } catch {
             XCTAssert(error is NetworkError, "Expected a NetworkError to be thrown")
         }
@@ -88,7 +91,7 @@ final class MovieSearchServiceTest: XCTestCase {
         
         do {
             let _ = try await service.fetchSearchMovie400Error(query: "범죄도시")
-            XCTFail()
+            XCTFail("Error")
         } catch {
             XCTAssert(error is NetworkError, "Expected a NetworkError to be thrown")
         }

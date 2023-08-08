@@ -50,21 +50,25 @@ final class MovieSearchUseCaseTest: XCTestCase {
     }
     
     func test_실제네트워크의_loadNowPlayingMovies란_함수가_잘동작하는가() async throws {
-        // given
         let usecase = DefaultMovieSearchUseCase(repository: DefaultMovieSearchRepository(movieSearchService: DefaultMovieSearchService()))
-        // when
-        let movies = try await usecase.loadNowPlayingMovies()
-        // then
-        XCTAssertFalse(movies.isEmpty)
+        
+        do {
+            let movies = try await usecase.loadNowPlayingMovies()
+            XCTAssertFalse(movies.isEmpty)
+        } catch {
+            XCTFail("Error")
+        }
     }
     
     func test_실제네트워크의_searchMovie란_함수가_잘동작하는가() async throws {
-        // given
         let title = "범죄도시"
         let usecase = DefaultMovieSearchUseCase(repository: DefaultMovieSearchRepository(movieSearchService: DefaultMovieSearchService()))
-        // when
-        let movies = try await usecase.searchMovie(query: title)
-        // then
-        XCTAssertFalse(movies.isEmpty)
+
+        do {
+            let movies = try await usecase.searchMovie(query: title)
+            XCTAssertFalse(movies.isEmpty)
+        } catch {
+            XCTFail("Error")
+        }
     }
 }
