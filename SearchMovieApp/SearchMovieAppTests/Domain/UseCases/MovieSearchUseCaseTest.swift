@@ -33,8 +33,8 @@ final class MovieSearchUseCaseTest: XCTestCase {
         // when
         movies = try await self.usecase.loadNowPlayingMovies()
         // then
-        XCTAssertTrue(movies.contains { $0.title == "비공식작전" })
-        XCTAssertTrue(movies.contains { $0.imagePath == "/7jTIUnjfaXu3ewCxEJXmIoMrish.jpg" })
+        XCTAssertTrue(movies.contains { $0.title == "틴에이지 크라켄 루비" })
+        XCTAssertTrue(movies.contains { $0.imagePath == "/nQsWPG020kSWdOl3EhFXRNE2s0n.jpg" })
         XCTAssertTrue(movies.contains { $0.overview == "10년 전, 유체이탈을 통해 기이한 사건을 겪은 '조쉬'와 '달튼' 부자는 그날의 기억을 모두 지운다. 10년 후,'조쉬'는 수상한 존재가 주변을 맴돌고 있음을 느끼고, 집을 떠나 대학에 입학한 ‘달튼'은 봉인된 기억 속 빨간 문에 대한 의문을 품게 된다. 램버트 가족에게 연달아 기괴한 사건들이 일어나고 과거의 비밀이 끔찍한 악몽으로 되살아나는데…" })
     }
     
