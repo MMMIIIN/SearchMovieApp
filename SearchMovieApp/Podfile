@@ -14,6 +14,7 @@ target 'SearchMovieApp' do
 
   target 'SearchMovieAppTests' do
     inherit! :search_paths
+    pod 'RxTest', '6.5.0'
     # Pods for testing
   end
 
