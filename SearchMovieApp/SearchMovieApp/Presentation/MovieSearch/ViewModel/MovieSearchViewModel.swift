@@ -46,9 +46,9 @@ final class MovieSearchViewModel {
             .filter { !$0.isEmpty }
             .distinctUntilChanged()
             .withUnretained(self)
-            .debounce(.seconds(1), scheduler: MainScheduler.instance)
+        // FIXME: - UI쪽으로 변경
+//            .debounce(.seconds(1), scheduler: MainScheduler.instance)
             .subscribe(onNext: { _, title in
-                print(title)
                 self.searchMovie(query: title)
             })
             .disposed(by: self.disposedBag)
