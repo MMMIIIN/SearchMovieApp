@@ -56,5 +56,21 @@ extension Movie {
         Movie(id: 12, originalTitle: "movie12", title: "movie12", overview: "test Movie12", imagePath: "", releaseDate: "", voteAverage: 1.0, voteCount: 1),
         Movie(id: 13, originalTitle: "movie13", title: "movie13", overview: "test Movie13", imagePath: "", releaseDate: "", voteAverage: 1.0, voteCount: 1)
     ]
+    
+    static let dummytNowPlayingMovieList: [Movie] = {
+        let dummyData = Data.loadMockNowPlayingMovieLsit()
+        
+        guard let movie = try? JSONDecoder().decode(MoviePlayingResponseDTO.self, from: dummyData) else { return [] }
+        let movieList = movie.toMovieList()
+        return movieList
+    }()
+    
+    static let dummySearchMovieList: [Movie] = {
+        let dummyData = Data.loadMockMovieList()
+        
+        guard let movie = try? JSONDecoder().decode(MovieSearchDTO.self, from: dummyData) else { return [] }
+        let movieList = movie.toMovieList()
+        return movieList
+    }()
 }
 #endif
