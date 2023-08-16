@@ -42,6 +42,7 @@
 		3995CC442A6A938C002CB927 /* MovieSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3995CC432A6A938C002CB927 /* MovieSearchViewModel.swift */; };
 		3995CC462A6A96E1002CB927 /* MovieSearchRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3995CC452A6A96E1002CB927 /* MovieSearchRepository.swift */; };
 		3995CC492A6EBCA1002CB927 /* MovieCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3995CC482A6EBCA1002CB927 /* MovieCollectionViewCell.swift */; };
+		39C635322A8BAD81006E7A69 /* AccessibilityIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39C635312A8BAD81006E7A69 /* AccessibilityIdentifier.swift */; };
 		DB168D09239C607C89C8BE79 /* Pods_SearchMovieApp_SearchMovieAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8379854C4ECF53A3ED21DDC3 /* Pods_SearchMovieApp_SearchMovieAppUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -100,6 +101,7 @@
 		3995CC432A6A938C002CB927 /* MovieSearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSearchViewModel.swift; sourceTree = "<group>"; };
 		3995CC452A6A96E1002CB927 /* MovieSearchRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSearchRepository.swift; sourceTree = "<group>"; };
 		3995CC482A6EBCA1002CB927 /* MovieCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCollectionViewCell.swift; sourceTree = "<group>"; };
+		39C635312A8BAD81006E7A69 /* AccessibilityIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityIdentifier.swift; sourceTree = "<group>"; };
 		7A60A301D72E7D104740521E /* Pods-SearchMovieAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SearchMovieAppTests.release.xcconfig"; path = "Target Support Files/Pods-SearchMovieAppTests/Pods-SearchMovieAppTests.release.xcconfig"; sourceTree = "<group>"; };
 		83702B7FEEF7D0D48164242B /* Pods-SearchMovieApp-SearchMovieAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SearchMovieApp-SearchMovieAppUITests.release.xcconfig"; path = "Target Support Files/Pods-SearchMovieApp-SearchMovieAppUITests/Pods-SearchMovieApp-SearchMovieAppUITests.release.xcconfig"; sourceTree = "<group>"; };
 		8379854C4ECF53A3ED21DDC3 /* Pods_SearchMovieApp_SearchMovieAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SearchMovieApp_SearchMovieAppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -257,6 +259,7 @@
 			isa = PBXGroup;
 			children = (
 				3915D5722A810320002D6C25 /* Extensions */,
+				39C635312A8BAD81006E7A69 /* AccessibilityIdentifier.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -737,6 +740,7 @@
 				3915D5402A74F7E5002D6C25 /* MovieSearchEndPoint.swift in Sources */,
 				3995CC3B2A6A7213002CB927 /* Movie.swift in Sources */,
 				3915D5612A78E35C002D6C25 /* MovieSearchDTO.swift in Sources */,
+				39C635322A8BAD81006E7A69 /* AccessibilityIdentifier.swift in Sources */,
 				3995CC412A6A9314002CB927 /* MovieSearchUseCase.swift in Sources */,
 				3915D5692A78F761002D6C25 /* JsonReader+Data.swift in Sources */,
 				3915D5452A750CAC002D6C25 /* APIKey+Bundle.swift in Sources */,
@@ -929,8 +933,9 @@
 				INFOPLIST_FILE = SearchMovieApp/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -981,8 +986,9 @@
 				INFOPLIST_FILE = SearchMovieApp/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
