@@ -17,6 +17,7 @@ final class MovieSearchView: UIView {
     private let flexContainerView = UIView()
     private let movieSearchBar: UISearchBar = {
         let searchBar = UISearchBar()
+        searchBar.searchTextField.accessibilityIdentifier = AccessibilityIdentifier.movieSearchBarTextField
         return searchBar
     }()
     private lazy var movieCollectionView: UICollectionView = {
