@@ -21,6 +21,7 @@ final class MovieSearchViewController: UIViewController {
     // MARK: - ui component
     
     private let movieSearchView = MovieSearchView()
+    private let movieTitleSubject = PublishRelay<String>()
     
     // MARK: - property
     
@@ -38,6 +39,7 @@ final class MovieSearchViewController: UIViewController {
         super.viewDidLoad()
         self.bindViewModel()
         self.setupDiffableDataSource()
+        self.delegateSearchBar()
     }
     
     // MARK: - func
@@ -50,7 +52,7 @@ final class MovieSearchViewController: UIViewController {
     private func transformedOutput() -> MovieSearchViewModelOutput {
         let input = MovieSearchViewModelInput(
             viewDidLoad: Observable.just(()).asObservable(),
-            searchMovie: self.movieSearchView.searchBar().searchTextField.rx.text.orEmpty.asObservable())
+            searchMovie: self.movieTitleSubject.asObservable())
         return self.viewModel.transform(input: input)
     }
     
@@ -77,5 +79,17 @@ final class MovieSearchViewController: UIViewController {
             cell.updateImageView(to: item.imagePath)
             return cell
         }
+    }
+    
+    private func delegateSearchBar() {
+        let searchBar = self.movieSearchView.searchBar()
+        searchBar.delegate = self
+    }
+}
+
+extension MovieSearchViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let text = searchBar.searchTextField.text else { return }
+        self.movieTitleSubject.accept(text)
     }
 }
