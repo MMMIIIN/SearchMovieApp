@@ -30,10 +30,8 @@ final class MovieSearchServiceTest: XCTestCase {
     }
     
     func test_searchMovie함수가_올바르게_디코딩되는가() async throws {
-        let mockService = MockMovieSearchService()
-        
         do {
-            let result = try await mockService.fetchSearchMovie(query: "범죄도시")
+            let result = try await self.service.fetchSearchMovie(query: "범죄도시")
             switch result {
             case .success(let movieList):
                 XCTAssertNotNil(movieList)
@@ -53,10 +51,8 @@ final class MovieSearchServiceTest: XCTestCase {
     }
     
     func test_nowPlaying함수가_올바르게_디코딩되는가() async throws {
-        let mockService = MockMovieSearchService()
-        
         do {
-            let result = try await mockService.fetchNowPlayingMovies()
+            let result = try await self.service.fetchNowPlayingMovies()
             switch result {
             case .success(let movieList):
                 XCTAssertNotNil(movieList)
